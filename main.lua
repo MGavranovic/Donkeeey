@@ -2,9 +2,11 @@ local lg = love.graphics
 
 local queen
 local card = require("card.card")
+local base_deck = require("deck.base_deck")
 
 function love.load()
-    queen = card:new()
+    Playing_deck = Base_deck:new()
+    queen = Playing_deck.cards[1]
 end
 
 function love.update()
