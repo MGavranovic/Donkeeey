@@ -12,11 +12,15 @@ function Card:new(name)
     return instance
 end
 
-function Card:draw()
-    lg.setColor(1, 1, 1)
-    lg.rectangle("line", 100, 200, self.width, self.height)
-
-    lg.print(self.name, 110, 210)
+function Card:draw(showFace)
+    if showFace or self.name == "2 Club" then
+        lg.setColor(1, 1, 1)
+        lg.rectangle("line", self.x, self.y, self.width, self.height)
+        lg.print(self.name, self.x + 5, self.y + 5)
+    else
+        lg.setColor(0.2, 0.2, 0.2) -- back of the card
+        lg.rectangle("fill", self.x, self.y, self.width, self.height)
+    end
 end
 
 return Card

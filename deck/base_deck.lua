@@ -19,7 +19,7 @@ function Base_deck:new()
         end
     end
 
-    table.insert(instance.cards, "2 Club")
+    table.insert(instance.cards, Card:new("2 Club"))
 
     return instance
 end
@@ -27,6 +27,29 @@ end
 function Base_deck:draw()
     for _, card in ipairs(self.cards) do
         lg.print(card, 110, 210)
+    end
+end
+
+function Base_deck:shuffle()
+    local cards = self.cards
+    for i = #cards, 2, -1 do
+        local j = love.math.random(i)
+        cards[i], cards[j] = cards[j], cards[i]
+    end
+end
+
+function Base_deck:deal(players)
+    local i = 1
+    while #self.cards > 0 do
+        local curr_player = players[i]
+        local card = table.remove(self.cards) -- removes last card from the deck
+
+        table.insert(curr_player.hand, card)
+
+        i = i + 1
+        if i > #players then
+            i = 1 -- cycle back to first player
+        end
     end
 end
 
