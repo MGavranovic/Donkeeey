@@ -12,8 +12,8 @@ function Card:new(name)
     return instance
 end
 
-function Card:draw(showFace)
-    if showFace or self.name == "2 Club" then
+function Card:draw(faceup)
+    if faceup or self.name == "2 Club" then
         lg.setColor(1, 1, 1)
         lg.rectangle("line", self.x, self.y, self.width, self.height)
         lg.print(self.name, self.x + 5, self.y + 5)
