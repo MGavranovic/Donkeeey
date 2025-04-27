@@ -20,6 +20,9 @@ function Card:draw(faceup)
     else
         lg.setColor(0.2, 0.2, 0.2) -- back of the card
         lg.rectangle("fill", self.x, self.y, self.width, self.height)
+
+        lg.setColor(1, 1, 1)
+        lg.print("facedown", self.x + 5, self.y + 5)
     end
 end
 
