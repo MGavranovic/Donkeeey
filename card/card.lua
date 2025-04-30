@@ -24,7 +24,7 @@ function Card:draw(faceup)
         lg.setColor(1, 1, 1)
         lg.rectangle("line", self.x, self.y, self.width, self.height)
         lg.print(self.name, self.x + 5, self.y + 5)
-    elseif self.name == "2 Club" then
+    elseif self.name == "2 of Clubs" then
         lg.setColor(1, 0, 0)
         lg.rectangle("line", self.x, self.y, self.width, self.height)
         lg.print(self.name, self.x + 5, self.y + 5)

@@ -11,15 +11,15 @@ function Base_deck:new()
     instance.cards = {}
 
     local ranks = { "Q", "K", "J", "A" }
-    local suites = { "Heart", "Spade", "Diamond", "Club" }
+    local suites = { "Hearts", "Spades", "Diamonds", "Clubs" }
     for _, rank in ipairs(ranks) do
         for _, suite in ipairs(suites) do
-            local name = rank .. suite
+            local name = rank .. " " .. "of" .. " " .. suite
             table.insert(instance.cards, Card:new(name))
         end
     end
 
-    table.insert(instance.cards, Card:new("2 Club"))
+    table.insert(instance.cards, Card:new("2 of Clubs"))
 
     return instance
 end
