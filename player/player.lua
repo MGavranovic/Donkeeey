@@ -17,6 +17,11 @@ function Player:drawHand()
     local card_h = c.Card_height
     local screen_w = lg.getWidth()
     local screen_h = lg.getHeight()
+    local mx, my = love.mouse.getPosition()
+
+    local function is_hovered(card)
+        return mx >= card.x and mx <= card.x + card_w and my >= card.y and my <= card.y + card_h
+    end
 
     if self.position == "bottom" or self.position == "top" then
         local total_width = #self.hand * spacing
@@ -32,7 +37,8 @@ function Player:drawHand()
         for i, card in ipairs(self.hand) do
             card.x = start_x + (i - 1) * spacing
             card.y = y
-            card:draw(self.position == "bottom") -- show face only for bottom
+            local hovered = is_hovered(card)
+            card:draw(self.position == "bottom", hovered) -- show face only for bottom
         end
     elseif self.position == "left" or self.position == "right" then
         local total_height = #self.hand * spacing
@@ -42,7 +48,8 @@ function Player:drawHand()
         for i, card in ipairs(self.hand) do
             card.x = x
             card.y = start_y + (i - 1) * spacing
-            card:draw(false)
+            local hovered = is_hovered(card)
+            card:draw(false, hovered)
         end
     end
 end
