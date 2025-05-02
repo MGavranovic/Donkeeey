@@ -11,6 +11,9 @@ function Player:new(position)
     return instance
 end
 
+--[[
+    This function draws all player hands and adds hover effects
+]]
 function Player:drawHand()
     local spacing = 100
     local card_w = c.Card_width
@@ -22,6 +25,8 @@ function Player:drawHand()
     local function is_hovered(card)
         return mx >= card.x and mx <= card.x + card_w and my >= card.y and my <= card.y + card_h
     end
+
+    local hovered_card = nil
 
     if self.position == "bottom" or self.position == "top" then
         local total_width = #self.hand * spacing
@@ -37,8 +42,24 @@ function Player:drawHand()
         for i, card in ipairs(self.hand) do
             card.x = start_x + (i - 1) * spacing
             card.y = y
-            local hovered = is_hovered(card)
-            card:draw(self.position == "bottom", hovered) -- show face only for bottom
+        end
+
+        for i = #self.hand, 1, -1 do
+            local card = self.hand[i]
+            if is_hovered(card) then
+                hovered_card = card
+                break
+            end
+        end
+
+        for _, card in ipairs(self.hand) do
+            if card ~= hovered_card then
+                card:draw(self.position == "bottom", false)
+            end
+        end
+
+        if hovered_card then
+            hovered_card:draw(self.position == "bottom", true)
         end
     elseif self.position == "left" or self.position == "right" then
         local total_height = #self.hand * spacing
@@ -48,8 +69,24 @@ function Player:drawHand()
         for i, card in ipairs(self.hand) do
             card.x = x
             card.y = start_y + (i - 1) * spacing
-            local hovered = is_hovered(card)
-            card:draw(false, hovered)
+        end
+
+        for i = #self.hand, 1, -1 do
+            local card = self.hand[i]
+            if is_hovered(card) then
+                hovered_card = card
+                break
+            end
+        end
+
+        for _, card in ipairs(self.hand) do
+            if card ~= hovered_card then
+                card:draw(false, false)
+            end
+        end
+
+        if hovered_card then
+            hovered_card:draw(false, true)
         end
     end
 end

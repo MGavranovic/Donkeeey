@@ -34,16 +34,11 @@ function Card:draw(faceup, hovered)
         g = 0.5
         b = 0.5
     end
-    if faceup then
-        lg.setColor(r, g, b)
-        lg.rectangle("line", self.x, self.y, self.width, self.height)
-        lg.print(self.name, self.x + 5, self.y + 5)
-    elseif self.name == "2 of Clubs" then
-        lg.setColor(r, g, b)
+    lg.setColor(r, g, b)
+    if faceup or self.name == "2 of Clubs" then
         lg.rectangle("line", self.x, self.y, self.width, self.height)
         lg.print(self.name, self.x + 5, self.y + 5)
     else
-        lg.setColor(r, g, b) -- back of the card
         lg.rectangle("fill", self.x, self.y, self.width, self.height)
 
         lg.setColor(1, 1, 1)
