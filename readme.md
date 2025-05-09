@@ -9,3 +9,7 @@ Inspiration is drawn from three games:
 - Pig Game - base gameplay
 - Balatro - amazing 2d pixel art style
 - Yu-Gi-Oh TCG - the twist to the base gameplay
+
+
+Current focus:
+- Working on sprites
